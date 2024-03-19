@@ -52,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          tags: ${{ secrets.DOCKER_USERNAME }}/location-app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/message_api:latest
           push: true
           file: ./Dockerfile
 

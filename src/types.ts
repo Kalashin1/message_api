@@ -27,9 +27,31 @@ export interface Messages extends Model<Message> {
       id: string;
       role: string;
     }
-  ): [];
+  ): Message[];
+  getChat(
+    owner: {
+      id: string;
+      role: string;
+    },
+    reciever: {
+      id: string;
+      role: string;
+    }
+  ): Message[];
   getMessageById(message_id: string): Message;
+  updateMessageStatus(id: any, status: typeof MESSAGE_STATUS[number]): Message;
 }
 
 export const MESSAGE_STATUS = ["SENT", "DELIVERED", "READ", "DELETED"] as const;
 
+export enum MESSAGE_EVENTS {
+  GET_MESSAGES = 'get_messages',
+  MESSAGES = 'messages',
+  MESSAGE = 'message',
+  MESSAGE_READ = 'message_read',
+  MESSAGES_READ = 'messages_read',
+  MESSAGE_DELIVERED = 'message_delivered',
+  MESSAGES_DELIVERED = 'messages_delivered',
+  NEW_MESSAGE = 'new_message',
+  GET_OTHER_MESSAGES = 'get_other_messages'
+}

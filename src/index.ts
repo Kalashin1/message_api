@@ -11,9 +11,9 @@ export const io = new Server({
 });
 
 const url =
-  'mongodb+srv://kalashin:Kalashin1@cluster0.4umw1.gcp.mongodb.net/magga?retryWrites=true&w=majority'
+  "mongodb+srv://kalashin:Kalashin1@cluster0.4umw1.gcp.mongodb.net/magga?retryWrites=true&w=majority";
 
-  // "mongodb://127.0.0.1:27017/location-api";
+// "mongodb://127.0.0.1:27017/location-api";
 
 mongoose
   .connect(url)
@@ -39,9 +39,9 @@ io.on("connection", (socket) => {
       socket.broadcast.emit(MESSAGE_EVENTS.MESSAGES, JSON.stringify(chat));
     }
   );
-  
+
   socket.on(
-    MESSAGE_EVENTS.GET_OTHER_MESSAGES ,
+    MESSAGE_EVENTS.GET_OTHER_MESSAGES,
     ({
       owner,
       receiver,
@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
     for (const { _id } of messages) {
       console.log("_id", _id);
       const message = await Messages.find({
-        _id: { $eq: new ObjectId(_id.toString()) }
+        _id: { $eq: new ObjectId(_id.toString()) },
       });
       console.log("message", message);
     }

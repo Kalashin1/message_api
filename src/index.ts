@@ -3,6 +3,11 @@ import { MESSAGE_STATUS, Message, MESSAGE_EVENTS } from "./types";
 import Messages from "./data/models/message";
 import mongoose from "mongoose";
 import { ObjectId } from "mongodb";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const PORT = parseFloat(process.env.PORT); // || 3000;
 
 export const io = new Server({
   cors: {
@@ -10,15 +15,14 @@ export const io = new Server({
   },
 });
 
-const url =
-  "mongodb+srv://kalashin:Kalashin1@cluster0.4umw1.gcp.mongodb.net/magga?retryWrites=true&w=majority";
+const url = process.env.DB_URL;
 
 // "mongodb://127.0.0.1:27017/location-api";
 
 mongoose
   .connect(url)
   .then((_result: any) => {
-    io.listen(8080);
+    io.listen(PORT);
     console.log("server runninig on PORT 3000");
   })
   .catch(console.log);
